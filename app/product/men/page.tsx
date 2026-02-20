@@ -1,15 +1,15 @@
 import { ProductCard } from "@/components/ProductCard";
-import { Product } from "@/lib/types";
+import dbConnect from "@/lib/mongodb";
+import Product from "@/lib/models/Product";
+import { Product as ProductType } from "@/lib/types";
 
-async function getMenProducts(): Promise<Product[]> {
+async function getMenProducts(): Promise<ProductType[]> {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/products?category=men`,
-      { cache: "no-store" }, // always fetch fresh data
-    );
-    if (!res.ok) throw new Error("Failed to fetch products");
-    const json = await res.json();
-    return json.data as Product[];
+    await dbConnect();
+    const products = await Product.find({ category: "men" }).sort({
+      createdAt: -1,
+    });
+    return JSON.parse(JSON.stringify(products));
   } catch (error) {
     console.error("Failed to load men's products:", error);
     return [];
