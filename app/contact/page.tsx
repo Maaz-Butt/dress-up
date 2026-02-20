@@ -3,6 +3,7 @@ import React from "react";
 import { NavbarButton } from "@/components/ui/resizable-navbar";
 import { IconMail, IconMapPin, IconPhone } from "@tabler/icons-react";
 import { motion } from "motion/react";
+import Image from "next/image";
 
 export default function ContactPage() {
   return (
@@ -11,9 +12,10 @@ export default function ContactPage() {
         {/* Left Side - Image & Info */}
         <div className="lg:w-1/2 relative bg-neutral-900 flex flex-col justify-between p-12 text-white">
           <div className="absolute inset-0 z-0">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=3388&auto=format&fit=crop"
               alt="Fashion Model"
+              fill
               className="w-full h-full object-cover opacity-60"
             />
             <div className="absolute inset-0 bg-linear-to-t from-black/80 to-transparent" />
