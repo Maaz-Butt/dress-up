@@ -99,14 +99,14 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
         >
           <div
             className={cn(
-              "absolute right-0 z-[1000] h-auto w-[5%] overflow-hidden bg-gradient-to-l"
+              "absolute right-0 z-[1000] h-auto w-[5%] overflow-hidden bg-gradient-to-l",
             )}
           ></div>
 
           <div
             className={cn(
               "flex flex-row justify-start gap-4 pl-4",
-              "mx-auto max-w-7xl" // remove max-w-4xl if you want the carousel to span the full width of its container
+              "mx-auto max-w-7xl", // remove max-w-4xl if you want the carousel to span the full width of its container
             )}
           >
             {items.map((item, index) => (
@@ -259,7 +259,7 @@ export const Card = ({
         <BlurImage
           src={card.src}
           alt={card.title}
-          fill="true"
+          fill
           className="absolute inset-0 z-10 object-cover"
         />
       </motion.button>
@@ -275,15 +275,21 @@ export const BlurImage = ({
   alt,
   ...rest
 }: ImageProps) => {
+  const [isLoading, setLoading] = useState(true);
   return (
-    <img
-      className={cn("h-full w-full transition duration-300", className)}
-      src={src as string}
-      width={width}
-      height={height}
+    <Image
+      className={cn(
+        "transition duration-300",
+        isLoading ? "blur-sm" : "blur-0",
+        className,
+      )}
+      onLoad={() => setLoading(false)}
+      src={src}
+      width={!rest.fill ? width : undefined}
+      height={!rest.fill ? height : undefined}
       loading="lazy"
       decoding="async"
-      blurdataurl={typeof src === "string" ? src : undefined}
+      blurDataURL={typeof src === "string" ? src : undefined}
       alt={alt ? alt : "Background of a beautiful view"}
       {...rest}
     />
