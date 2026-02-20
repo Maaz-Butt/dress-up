@@ -31,6 +31,10 @@ export function NavbarDemo({ children }: { children: React.ReactNode }) {
       name: "Contact",
       link: "/contact",
     },
+    {
+      name: "Admin",
+      link: "/admin",
+    },
   ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

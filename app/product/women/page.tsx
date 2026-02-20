@@ -1,12 +1,23 @@
-"use client";
-
 import { ProductCard } from "@/components/ProductCard";
-import { products } from "@/lib/data";
+import { Product } from "@/lib/types";
 
-export default function WomenPage() {
-  const womenProducts = products.filter(
-    (product) => product.category === "women",
-  );
+async function getWomenProducts(): Promise<Product[]> {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/products?category=women`,
+      { cache: "no-store" }, // always fetch fresh data
+    );
+    if (!res.ok) throw new Error("Failed to fetch products");
+    const json = await res.json();
+    return json.data as Product[];
+  } catch (error) {
+    console.error("Failed to load women's products:", error);
+    return [];
+  }
+}
+
+export default async function WomenPage() {
+  const womenProducts = await getWomenProducts();
 
   return (
     <div className="min-h-screen bg-white dark:bg-neutral-950 pt-32 pb-20">
@@ -97,11 +108,15 @@ export default function WomenPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-12">
-              {womenProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
+            {womenProducts.length === 0 ? (
+              <p className="text-neutral-400 text-sm">No products found.</p>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-12">
+                {womenProducts.map((product) => (
+                  <ProductCard key={product._id} product={product} />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
