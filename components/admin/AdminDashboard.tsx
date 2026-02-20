@@ -187,6 +187,33 @@ export default function AdminDashboard() {
               />
             </div>
             <button
+              onClick={async () => {
+                if (
+                  !confirm(
+                    "This will clear the current database and restore original sample products. Continue?",
+                  )
+                )
+                  return;
+                try {
+                  setIsSaving(true);
+                  const res = await fetch("/api/seed", { method: "POST" });
+                  if (res.ok) {
+                    await fetchProducts();
+                    alert("Database seeded successfully!");
+                  }
+                } catch (error) {
+                  console.error("Error seeding database:", error);
+                } finally {
+                  setIsSaving(false);
+                }
+              }}
+              disabled={isSaving}
+              className="bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 hover:opacity-80 transition-opacity border border-neutral-200 dark:border-neutral-700"
+            >
+              <TrendingUp size={18} />
+              Seed Data
+            </button>
+            <button
               onClick={openAddModal}
               className="bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 hover:opacity-80 transition-opacity"
             >

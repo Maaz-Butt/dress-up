@@ -19,6 +19,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "img.sonofatailor.com",
       },
+      {
+        protocol: "https",
+        hostname: "cdn-2.stacees.co.uk",
+      },
     ],
   },
 };
