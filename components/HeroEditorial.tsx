@@ -45,12 +45,14 @@ export function HeroEditorial() {
           </h1>
           <div className="flex gap-4 justify-center">
             <NavbarButton
+              href="/product/women"
               variant="primary"
               className="bg-white text-black hover:bg-neutral-200 border-none px-8 py-3 rounded-none uppercase tracking-widest text-xs font-bold"
             >
               Shop Women
             </NavbarButton>
             <NavbarButton
+              href="/product/men"
               variant="secondary"
               className="bg-transparent border border-white text-white hover:bg-white/10 px-8 py-3 rounded-none uppercase tracking-widest text-xs font-bold"
             >

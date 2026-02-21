@@ -63,10 +63,7 @@ export function NavbarDemo({ children }: { children: React.ReactNode }) {
             />
           </MobileNavHeader>
 
-          <MobileNavMenu
-            isOpen={isMobileMenuOpen}
-            onClose={() => setIsMobileMenuOpen(false)}
-          >
+          <MobileNavMenu isOpen={isMobileMenuOpen}>
             {navItems.map((item, idx) => (
               <Link
                 key={`mobile-link-${idx}`}

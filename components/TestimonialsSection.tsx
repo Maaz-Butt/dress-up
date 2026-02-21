@@ -9,7 +9,7 @@ export function TestimonialsSection() {
         "I absolutely love the quality of the clothes. The delivery was super fast too!",
       name: "Sarah Jenkins",
       title: "Fashion Blogger",
-      aatar:
+      avatar:
         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop",
     },
     {
@@ -17,7 +17,7 @@ export function TestimonialsSection() {
         "Dress Up has completely transformed my wardrobe. Highly recommended!",
       name: "Michael Chen",
       title: "Software Engineer",
-      aatar:
+      avatar:
         "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=3387&auto=format&fit=crop",
     },
     {
@@ -25,7 +25,7 @@ export function TestimonialsSection() {
         "The customer service is outstanding. They helped me find the perfect size.",
       name: "Emily Davis",
       title: "Marketing Director",
-      aatar:
+      avatar:
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop",
     },
   ];
@@ -46,7 +46,7 @@ export function TestimonialsSection() {
             >
               <div className="flex items-center gap-4 mb-4">
                 <Image
-                  src={testimonial.aatar}
+                  src={testimonial.avatar}
                   alt={testimonial.name}
                   width={48}
                   height={48}
