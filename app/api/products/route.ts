@@ -14,10 +14,10 @@ export async function GET(request: NextRequest) {
         const products = await Product.find(filter).sort({ createdAt: -1 });
 
         return NextResponse.json({ success: true, data: products }, { status: 200 });
-    } catch (error) {
+    } catch (error: any) {
         console.error("GET /api/products error:", error);
         return NextResponse.json(
-            { success: false, error: "Failed to fetch products" },
+            { success: false, error: error.message || "Failed to fetch products" },
             { status: 500 }
         );
     }
@@ -32,10 +32,10 @@ export async function POST(request: NextRequest) {
         const product = await Product.create(body);
 
         return NextResponse.json({ success: true, data: product }, { status: 201 });
-    } catch (error) {
+    } catch (error: any) {
         console.error("POST /api/products error:", error);
         return NextResponse.json(
-            { success: false, error: "Failed to create product" },
+            { success: false, error: error.message || "Failed to create product" },
             { status: 400 }
         );
     }

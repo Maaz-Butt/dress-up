@@ -22,10 +22,10 @@ export async function GET(_request: NextRequest, context: RouteContext) {
         }
 
         return NextResponse.json({ success: true, data: product }, { status: 200 });
-    } catch (error) {
+    } catch (error: any) {
         console.error("GET /api/products/[id] error:", error);
         return NextResponse.json(
-            { success: false, error: "Failed to fetch product" },
+            { success: false, error: error.message || "Failed to fetch product" },
             { status: 500 }
         );
     }
@@ -52,10 +52,10 @@ export async function PUT(request: NextRequest, context: RouteContext) {
         }
 
         return NextResponse.json({ success: true, data: product }, { status: 200 });
-    } catch (error) {
+    } catch (error: any) {
         console.error("PUT /api/products/[id] error:", error);
         return NextResponse.json(
-            { success: false, error: "Failed to update product" },
+            { success: false, error: error.message || "Failed to update product" },
             { status: 400 }
         );
     }
@@ -80,10 +80,10 @@ export async function DELETE(_request: NextRequest, context: RouteContext) {
             { success: true, message: "Product deleted successfully" },
             { status: 200 }
         );
-    } catch (error) {
+    } catch (error: any) {
         console.error("DELETE /api/products/[id] error:", error);
         return NextResponse.json(
-            { success: false, error: "Failed to delete product" },
+            { success: false, error: error.message || "Failed to delete product" },
             { status: 500 }
         );
     }

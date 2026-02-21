@@ -38,9 +38,13 @@ export default function AdminDashboard() {
       const data = await res.json();
       if (data.success) {
         setProducts(data.data);
+      } else {
+        console.error("API error fetching products:", data.error);
+        alert(`Error: ${data.error}`);
       }
     } catch (error) {
-      console.error("Error fetching products:", error);
+      console.error("Network error fetching products:", error);
+      alert("Failed to connect to the server.");
     } finally {
       setLoading(false);
     }
@@ -55,9 +59,14 @@ export default function AdminDashboard() {
       });
       if (res.ok) {
         setProducts(products.filter((p) => getProductId(p) !== id));
+      } else {
+        const data = await res.json();
+        console.error("API error deleting product:", data.error);
+        alert(`Failed to delete: ${data.error}`);
       }
     } catch (error) {
-      console.error("Error deleting product:", error);
+      console.error("Network error deleting product:", error);
+      alert("Network error.");
     }
   };
 
@@ -83,9 +92,14 @@ export default function AdminDashboard() {
         await fetchProducts();
         setIsModalOpen(false);
         setCurrentProduct(null);
+      } else {
+        const data = await res.json();
+        console.error("API error saving product:", data.error);
+        alert(`Failed to save: ${data.error}`);
       }
     } catch (error) {
-      console.error("Error saving product:", error);
+      console.error("Network error saving product:", error);
+      alert("Network error.");
     } finally {
       setIsSaving(false);
     }
