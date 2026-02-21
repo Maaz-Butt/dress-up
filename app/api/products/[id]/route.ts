@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import dbConnect from "@/lib/mongodb";
 import Product from "@/lib/models/Product";
 
@@ -51,6 +52,10 @@ export async function PUT(request: NextRequest, context: RouteContext) {
             );
         }
 
+        // Revalidate the product pages
+        revalidatePath("/product/men");
+        revalidatePath("/product/women");
+
         return NextResponse.json({ success: true, data: product }, { status: 200 });
     } catch (error: any) {
         console.error("PUT /api/products/[id] error:", error);
@@ -75,6 +80,10 @@ export async function DELETE(_request: NextRequest, context: RouteContext) {
                 { status: 404 }
             );
         }
+
+        // Revalidate the product pages
+        revalidatePath("/product/men");
+        revalidatePath("/product/women");
 
         return NextResponse.json(
             { success: true, message: "Product deleted successfully" },

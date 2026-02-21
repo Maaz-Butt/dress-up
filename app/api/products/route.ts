@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import dbConnect from "@/lib/mongodb";
 import Product from "@/lib/models/Product";
 
@@ -30,6 +31,10 @@ export async function POST(request: NextRequest) {
 
         const body = await request.json();
         const product = await Product.create(body);
+
+        // Revalidate the product pages
+        revalidatePath("/product/men");
+        revalidatePath("/product/women");
 
         return NextResponse.json({ success: true, data: product }, { status: 201 });
     } catch (error: any) {

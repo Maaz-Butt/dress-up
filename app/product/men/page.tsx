@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { ProductCard } from "@/components/ProductCard";
 import dbConnect from "@/lib/mongodb";
 import Product from "@/lib/models/Product";
